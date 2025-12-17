@@ -1,7 +1,11 @@
 [package]
 name = "tenebrisnoctua/structu"
+description = "StructU is a low-level struct creation system in Luau that is used to save memory when creating objects."
 version = "1.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
+license = "MIT"
+exclude = ["**"]
+include = ["LICENSE", "src", "src/*", "default.project.json", "wally.toml"]
 
 [dependencies]
