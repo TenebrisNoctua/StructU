@@ -1,6 +1,9 @@
 -- Written by @TenebrisNoctua
 -- DataType module for int8
 
+local readi8 = buffer.readi8
+local writei8 = buffer.writei8
+
 --// Return Handler
 
 return table.freeze({
@@ -9,9 +12,9 @@ return table.freeze({
 	requiredType = "number",
 	
 	read = @native function(buf: buffer, cursor: number)
-		return buffer.readi8(buf, cursor)
+		return readi8(buf, cursor)
 	end,
 	write = @native function(buf: buffer, cursor: number, value: number)
-		buffer.writei8(buf, cursor, value)
+		writei8(buf, cursor, value)
 	end
 })

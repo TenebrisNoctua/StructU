@@ -1,3 +1,4 @@
+--!strict
 --!native
 
 -- Written by @TenebrisNoctua
@@ -11,15 +12,17 @@ local Proxy = require('@self/Proxy')
 local int8 = require('@self/DataTypes/int8')
 local int16 = require('@self/DataTypes/int16')
 local int32 = require('@self/DataTypes/int32')
+local int64 = require('@self/DataTypes/int64')
 local uint8 = require('@self/DataTypes/uint8')
 local uint16 = require('@self/DataTypes/uint16')
 local uint32 = require('@self/DataTypes/uint32')
+local uint64 = require('@self/DataTypes/uint64')
 local float32 = require('@self/DataTypes/float32')
 local float64 = require('@self/DataTypes/float64')
 local bool = require('@self/DataTypes/bool')
 local string = require('@self/DataTypes/string')
 
-local AllDataTypes = {int8, int16, int32, uint8, uint16, uint32, float32, float64, bool}
+local AllDataTypes = {int8, int16, int32, int64, uint8, uint16, uint32, uint64, float32, float64, bool}
 local Ref: any = table.create(0)
 
 --// Local Functions
@@ -69,7 +72,7 @@ local function struct(structData: {[string]: dataType<any>})
 	
 	return function(dataTable: anyTable?)
 		local newBuffer = buffer.create(position)
-		local newObject = Proxy({
+		local newObject = Proxy {
 			__index = function(t: anyTable, i: any)
 				if i == "raw" then return newBuffer end
 				
@@ -97,7 +100,7 @@ local function struct(structData: {[string]: dataType<any>})
 			__tostring = function()
 				return tostring(newBuffer)
 			end
-		})
+		}
 		
 		for key, valueType in structData do
 			local value = if dataTable then dataTable[key] else valueType.default
@@ -115,15 +118,18 @@ end
 
 return {
 	struct = struct,
-	string = createString,
-
+	
 	int8 = int8 :: any,
 	int16 = int16 :: any,
 	int32 = int32 :: any,
+	int64 = int64 :: any,
 	uint8 = uint8 :: any,
 	uint16 = uint16 :: any,
 	uint32 = uint32 :: any,
+	uint64 = uint64 :: any,
 	float32 = float32 :: any,
 	float64 = float64 :: any,
-	bool = bool :: any
+	bool = bool :: any,
+	
+	string = createString,
 } :: StructU

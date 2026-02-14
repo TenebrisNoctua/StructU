@@ -1,6 +1,9 @@
 -- Written by @TenebrisNoctua
 -- DataType module for float32
 
+local readf32 = buffer.readf32
+local writef32 = buffer.writef32
+
 --// Return Handler
 
 return table.freeze({
@@ -9,9 +12,9 @@ return table.freeze({
 	requiredType = "number",
 	
 	read = @native function(buf: buffer, cursor: number)
-		return buffer.readf32(buf, cursor)
+		return readf32(buf, cursor)
 	end,
 	write = @native function(buf: buffer, cursor: number, value: number)
-		buffer.writef32(buf, cursor, value)
+		writef32(buf, cursor, value)
 	end
 })

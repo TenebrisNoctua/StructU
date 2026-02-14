@@ -1,6 +1,9 @@
 -- Written by @TenebrisNoctua
 -- DataType module for uint16
 
+local readu16 = buffer.readu16
+local writeu16 = buffer.writeu16
+
 --// Return Handler
 
 return table.freeze({
@@ -9,9 +12,9 @@ return table.freeze({
 	requiredType = "number",
 	
 	read = @native function(buf: buffer, cursor: number)
-		return buffer.readu16(buf, cursor)
+		return readu16(buf, cursor)
 	end,
 	write = @native function(buf: buffer, cursor: number, value: number)
-		buffer.writeu16(buf, cursor, value)
+		writeu16(buf, cursor, value)
 	end
 })
